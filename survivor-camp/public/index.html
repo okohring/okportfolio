@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Survivor Camp Prototype v0.4</title>
-  <link rel="stylesheet" href="/style.css" />
-  <link rel="stylesheet" href="/tribal.css" />
+  <title>Survivor Camp Prototype v0.5</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tribal.css" />
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -26,7 +26,10 @@
       </div>
     </div>
 
-    <div class="timer-pill"><span>⌛</span><strong id="timerText">00:30</strong></div>
+    <div class="timer-pill">
+      <span>⌛</span>
+      <strong id="timerText">00:30</strong>
+    </div>
 
     <div class="feed-pill">
       <div id="feedLines" class="feed-lines"></div>
@@ -36,7 +39,11 @@
       </form>
     </div>
 
-    <div class="people-pill"><span>💬</span><span>👥</span><strong>8/8</strong></div>
+    <div class="people-pill">
+      <span>💬</span>
+      <span>👥</span>
+      <strong>8/8</strong>
+    </div>
   </div>
 
   <div id="readPanel" class="read-panel">
@@ -46,13 +53,17 @@
     <div class="meters">
       <div><span>Fire</span><meter id="fireMeter" min="0" max="100" value="58"></meter></div>
       <div><span>Water</span><meter id="waterMeter" min="0" max="100" value="45"></meter></div>
+      <div><span>Food</span><meter id="foodMeter" min="0" max="100" value="42"></meter></div>
       <div><span>Shelter</span><meter id="shelterMeter" min="0" max="100" value="50"></meter></div>
     </div>
   </div>
 
   <div id="conversationPanel" class="conversation-panel hidden">
     <div class="conversation-header">
-      <div><div class="panel-label">IN CONVERSATION</div><div id="conversationName" class="conversation-name">Milo</div></div>
+      <div>
+        <div class="panel-label">IN CONVERSATION</div>
+        <div id="conversationName" class="conversation-name">Milo</div>
+      </div>
       <button id="endConversation" type="button">Leave</button>
     </div>
     <div id="conversationRead" class="conversation-read"></div>
@@ -64,9 +75,10 @@
 
   <div id="startModal" class="modal">
     <div class="modal-card">
-      <h1>Survivor Prototype v0.4</h1>
-      <p>This version gives you a 30-second camp phase, a quick Tug of War challenge, and a 30-second Tribal Council phase.</p>
-      <p><strong>Move:</strong> click the map, or use WASD. <strong>Talk:</strong> click a nearby castaway, use a Talk button, or press T while in conversation.</p>
+      <h1>Survivor Prototype v0.5</h1>
+      <p>The original illustrated island is back. You have a 30-second camp phase, then Tug of War, then Tribal Council.</p>
+      <p><strong>Camp jobs:</strong> Tend Fire at the fire pit, collect water at the well/dock, gather food at the cove, and repair the shelter. These raise the four camp meters.</p>
+      <p><strong>Move:</strong> click the island or use WASD. <strong>Talk:</strong> click a nearby castaway or use the Talk actions.</p>
       <button id="startButton">Start 30-Second Camp Phase</button>
     </div>
   </div>
@@ -74,7 +86,7 @@
   <div id="phaseEnd" class="modal hidden">
     <div class="modal-card">
       <h1>Camp Phase Complete</h1>
-      <p>Time's up. Your tribe is being called into the first challenge.</p>
+      <p>Time's up. Your tribe is heading to the immunity challenge.</p>
       <p id="phaseSummary"></p>
       <button id="challengeStartButton">Start Tug of War</button>
     </div>
@@ -93,7 +105,7 @@
       </div>
       <div id="challengeStatus" class="challenge-status">Ready... pull!</div>
       <button id="pullButton" class="pull-button">PULL!</button>
-      <button id="challengeRestartButton" class="hidden">Continue to Tribal Council</button>
+      <button id="challengeContinueButton" class="hidden">Continue to Tribal Council</button>
     </div>
   </div>
 
@@ -101,7 +113,7 @@
     <div class="modal-card tribal-card">
       <div class="panel-label">TRIBAL COUNCIL</div>
       <h1 id="tribalHeading">Tribal Council</h1>
-      <p id="tribalRead">The tribe takes its seats. You have 30 seconds before the votes are revealed.</p>
+      <p id="tribalRead">The tribe takes its seats.</p>
       <div class="challenge-timer"><span>TIME</span><strong id="tribalTimer">30</strong></div>
       <div id="tribalCandidates" class="tribal-candidates" aria-label="Tribal Council castaways"></div>
       <div id="tribalVoteStatus" class="tribal-status">The tribe is settling in...</div>
@@ -111,7 +123,12 @@
     </div>
   </div>
 
-  <script src="/app.js"></script>
-  <script src="/tribal.js"></script>
+  <script src="core.js"></script>
+  <script src="phases.js"></script>
+  <script src="camp.js"></script>
+  <script src="social.js"></script>
+  <script src="graphics-world.js"></script>
+  <script src="graphics-props.js"></script>
+  <script src="events.js"></script>
 </body>
 </html>
