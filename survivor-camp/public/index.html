@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Survivor Camp + Tug of War Prototype v0.3</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="topHud" class="top-hud">
+    <div class="day-pill">
+      <span class="tiny">DAY</span>
+      <strong>1</strong>
+      <span class="sun">☀</span>
+      <span id="worldTime">18:12</span>
+    </div>
+
+    <div class="phase-pill">
+      <div class="phase-icon" id="phaseIcon">🔥</div>
+      <div>
+        <div class="phase-title" id="phaseTitle">CAMP PHASE</div>
+        <div class="phase-subtitle" id="phaseSubtitle">Move, gather, whisper, and watch who leaves.</div>
+      </div>
+    </div>
+
+    <div class="timer-pill">
+      <span>⌛</span>
+      <strong id="timerText">00:30</strong>
+    </div>
+
+    <div class="feed-pill">
+      <div id="feedLines" class="feed-lines"></div>
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" autocomplete="off" placeholder="Press T or click to say something at your current location…" />
+        <button type="submit">Say</button>
+      </form>
+    </div>
+
+    <div class="people-pill">
+      <span>💬</span>
+      <span>👥</span>
+      <strong>8/8</strong>
+    </div>
+  </div>
+
+  <div id="readPanel" class="read-panel">
+    <div class="panel-label">CURRENT READ</div>
+    <div id="zoneName" class="zone-name">Camp</div>
+    <div id="zoneRead" class="zone-read">Click somewhere on the island to move. Watch who splits off.</div>
+    <div class="meters">
+      <div><span>Fire</span><meter id="fireMeter" min="0" max="100" value="58"></meter></div>
+      <div><span>Water</span><meter id="waterMeter" min="0" max="100" value="45"></meter></div>
+      <div><span>Shelter</span><meter id="shelterMeter" min="0" max="100" value="50"></meter></div>
+    </div>
+  </div>
+
+
+  <div id="conversationPanel" class="conversation-panel hidden">
+    <div class="conversation-header">
+      <div>
+        <div class="panel-label">IN CONVERSATION</div>
+        <div id="conversationName" class="conversation-name">Milo</div>
+      </div>
+      <button id="endConversation" type="button">Leave</button>
+    </div>
+    <div id="conversationRead" class="conversation-read"></div>
+    <div id="conversationLog" class="conversation-log"></div>
+    <div id="conversationChips" class="conversation-chips"></div>
+  </div>
+
+  <div id="actionBar" class="action-bar"></div>
+
+  <div id="startModal" class="modal">
+    <div class="modal-card">
+      <h1>Survivor Prototype v0.3</h1>
+      <p>This version gives you a 30-second camp phase, then throws the tribe straight into a quick Tug of War challenge.</p>
+      <p><strong>Move:</strong> click the map, or use WASD. <strong>Talk:</strong> click a nearby castaway, use a Talk button, or press T while in conversation. <strong>Goal:</strong> test whether conversations feel smoother without cluttering the camp.</p>
+      <button id="startButton">Start 30-Second Camp Phase</button>
+    </div>
+  </div>
+
+  <div id="phaseEnd" class="modal hidden">
+    <div class="modal-card">
+      <h1>Camp Phase Complete</h1>
+      <p>Time's up. Your tribe is being called into the first challenge.</p>
+      <p id="phaseSummary"></p>
+      <button id="challengeStartButton">Start Tug of War</button>
+    </div>
+  </div>
+
+  <div id="challengeModal" class="modal hidden">
+    <div class="modal-card challenge-card">
+      <div class="panel-label">IMMUNITY CHALLENGE</div>
+      <h1 id="challengeHeading">Tug of War</h1>
+      <p id="challengeRead">Mash <strong>PULL!</strong> or press <strong>Space</strong>. Get the knot onto your side before time runs out.</p>
+
+      <div class="challenge-timer"><span>TIME</span><strong id="challengeTimer">12.0</strong></div>
+
+      <div class="tug-wrap" aria-label="Tug of war progress">
+        <div class="tug-label left">OTHER TRIBE</div>
+        <div class="tug-track">
+          <div class="tug-center"></div>
+          <div id="tugKnot" class="tug-knot">🪢</div>
+        </div>
+        <div class="tug-label right">YOUR TRIBE</div>
+      </div>
+
+      <div id="challengeStatus" class="challenge-status">Ready... pull!</div>
+      <button id="pullButton" class="pull-button">PULL!</button>
+      <button id="challengeRestartButton" class="hidden">Run It Again</button>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
