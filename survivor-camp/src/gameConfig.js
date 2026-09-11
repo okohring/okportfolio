@@ -8,5 +8,8 @@ module.exports = Object.freeze({
     opponentPullPerSecond: 17,
     opponentWaveAmplitude: 2.5,
     winThreshold: 100
+  }),
+  tribalCouncil: Object.freeze({
+    durationSeconds: 30
   })
 });
