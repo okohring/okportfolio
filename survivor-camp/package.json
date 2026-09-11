@@ -1,13 +1,13 @@
 {
   "name": "survivor-camp-prototype",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
-  "description": "Developer handoff for a social-strategy camp prototype with Camp, Tug of War, and Tribal Council phases.",
+  "description": "Developer handoff for illustrated Survivor-style camp, Tug of War, and Tribal Council prototype.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "check": "node --check server.js && node --check public/app.js && node --check public/tribal.js && node --check src/gameConfig.js"
+    "check": "node --check server.js && node --check public/core.js && node --check public/phases.js && node --check public/camp.js && node --check public/social.js && node --check public/graphics-world.js && node --check public/graphics-props.js && node --check public/events.js && node --check src/gameConfig.js"
   },
   "engines": {
     "node": ">=18"
