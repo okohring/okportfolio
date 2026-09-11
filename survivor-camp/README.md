@@ -1,4 +1,4 @@
-# Survivor Camp Prototype v0.3
+# Survivor Camp Prototype v0.4
 
 A frontend gameplay prototype intended as a **developer handoff**, not a production multiplayer implementation.
 
@@ -7,7 +7,17 @@ Current playable loop:
 1. 30-second camp/social phase.
 2. Camp phase summary.
 3. 12-second Tug of War button-mash challenge.
-4. Win/loss result and restart.
+4. 30-second Tribal Council.
+5. Vote reveal/result and restart.
+
+## Tribal Council rule in this prototype
+
+The Tug of War result controls Council permissions:
+
+- **Lose Tug of War:** you may view the full 30-second Tribal Council and vote reveal, but you are a spectator only. Voting and participation controls are disabled.
+- **Win Tug of War:** voting controls are enabled and you may submit one vote before the timer expires.
+
+This permission distinction is intentional and should be enforced by the backend rather than trusted from the client.
 
 ## Run locally
 
@@ -27,31 +37,31 @@ No npm dependencies are required for the prototype.
 public/                 Browser client prototype
   index.html
   style.css
-  app.js
+  app.js                Camp + Tug of War prototype logic
+  tribal.css            Tribal Council UI
+  tribal.js             Tribal Council permission/timer/vote prototype
 src/
   gameConfig.js         Server-owned prototype tuning values
 server.js               Static server + minimal JSON API
 package.json
 docs/
-  BACKEND_HANDOFF.md    What should move server-side next
+  BACKEND_HANDOFF.md    General multiplayer backend notes
   API_CONTRACT.md       Proposed multiplayer HTTP/WebSocket contract
+  TRIBAL_COUNCIL.md     Council-specific backend rules
 ```
 
 ## Existing API
 
 - `GET /api/health` — liveness check.
-- `GET /api/config` — prototype tuning values. The client has matching fallback values so visual work remains testable if the endpoint is unavailable.
+- `GET /api/config` — prototype tuning values, including the 30-second Camp and Tribal Council timers.
 
 ## Important implementation note
 
-The NPCs, camp movement, conversations, timer progression, and Tug of War result are currently simulated in the browser. That is intentional for rapid gameplay iteration. **Do not treat client state as authoritative in multiplayer.** See `docs/BACKEND_HANDOFF.md` for the recommended ownership split.
+The NPCs, camp movement, conversations, challenge result, and Tribal Council tally are currently simulated in the browser. That is intentional for rapid gameplay iteration. **Do not treat client state as authoritative in multiplayer.**
 
 ## Prototype controls
 
 - Move: click or WASD/arrow keys.
 - Talk: click a nearby castaway or use the conversation controls.
 - Tug of War: mash **PULL!** or press **Space**.
-
-## Product intent
-
-The camp phase is trying to make social movement readable: who leaves the group, where private conversations happen, and whether mundane camp tasks can double as social cover. Tug of War is deliberately simple; its purpose is to prove the transition from social phase → challenge phase before building richer multiplayer challenge logic.
+- Tribal Council: participant mode can select/cast one vote; spectator mode is read-only.
