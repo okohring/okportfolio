@@ -1,0 +1,16 @@
+{
+  "name": "survivor-camp-prototype",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Developer handoff for a social-strategy camp prototype with a 30-second camp phase and Tug of War challenge.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check public/app.js && node --check src/gameConfig.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}
