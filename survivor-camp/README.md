@@ -1,23 +1,17 @@
-# Survivor Camp Prototype v0.4
+# Survivor Camp Prototype v0.5
 
-Current playable loop:
+Developer handoff with the **illustrated island/camp presentation restored**.
 
-1. 30-second camp/social phase.
-2. Camp phase summary.
-3. 12-second Tug of War button-mash challenge.
-4. 30-second Tribal Council.
-5. Vote reveal/result and restart.
+## Playable loop
 
-## Tribal Council rule in this prototype
+1. 30-second Camp phase on the illustrated island.
+2. Camp jobs: **Fire, Water, Food, Shelter**.
+3. Tug of War immunity challenge.
+4. **Lose challenge:** attend Tribal Council and cast a vote.
+5. **Win challenge:** view the losing tribe's Tribal Council in spectator-only mode.
+6. Tribal Council lasts 30 seconds, then votes are revealed.
 
-The Tug of War result controls Council permissions:
-
-- **Lose Tug of War:** you may view the full 30-second Tribal Council and vote reveal, but you are a spectator only. Voting and participation controls are disabled.
-- **Win Tug of War:** voting controls are enabled and you may submit one vote before the timer expires.
-
-This permission distinction is intentional and should be enforced by the backend rather than trusted from the client.
-
-## Run locally
+## Run
 
 Requires Node.js 18+.
 
@@ -25,41 +19,16 @@ Requires Node.js 18+.
 npm start
 ```
 
-Open `http://localhost:3000`.
+Then open `http://localhost:3000`.
 
-No npm dependencies are required for the prototype.
+## Controls
 
-## Project structure
+- Click the island or use WASD/arrow keys to move.
+- Click nearby castaways or use Talk actions to converse.
+- Camp jobs are location-based: Tend Fire, collect water, gather food/fish, repair shelter.
+- Tug of War: click **PULL!** or press Space.
+- If your tribe loses, choose and cast one Tribal vote before the timer ends.
 
-```text
-public/                 Browser client prototype
-  index.html
-  style.css
-  app.js                Camp + Tug of War prototype logic
-  tribal.css            Tribal Council UI
-  tribal.js             Tribal Council permission/timer/vote prototype
-src/
-  gameConfig.js         Server-owned prototype tuning values
-server.js               Static server + minimal JSON API
-package.json
-docs/
-  BACKEND_HANDOFF.md    General multiplayer backend notes
-  API_CONTRACT.md       Proposed multiplayer HTTP/WebSocket contract
-  TRIBAL_COUNCIL.md     Council-specific backend rules
-```
+## Backend note
 
-## Existing API
-
-- `GET /api/health` — liveness check.
-- `GET /api/config` — prototype tuning values, including the 30-second Camp and Tribal Council timers.
-
-## Important implementation note
-
-The NPCs, camp movement, conversations, challenge result, and Tribal Council tally are currently simulated in the browser. That is intentional for rapid gameplay iteration. **Do not treat client state as authoritative in multiplayer.**
-
-## Prototype controls
-
-- Move: click or WASD/arrow keys.
-- Talk: click a nearby castaway or use the conversation controls.
-- Tug of War: mash **PULL!** or press **Space**.
-- Tribal Council: participant mode can select/cast one vote; spectator mode is read-only.
+The prototype is client-simulated. Production multiplayer must make phase timing, challenge results, Tribal eligibility, and vote acceptance authoritative on the server. In particular, **challenge loss grants voting participation; challenge win grants read-only spectator access to the other tribe's Council.**
