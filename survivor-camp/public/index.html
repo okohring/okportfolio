@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Survivor Camp + Tug of War Prototype v0.3</title>
+  <title>Survivor Camp Prototype v0.4</title>
   <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/tribal.css" />
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -25,10 +26,7 @@
       </div>
     </div>
 
-    <div class="timer-pill">
-      <span>⌛</span>
-      <strong id="timerText">00:30</strong>
-    </div>
+    <div class="timer-pill"><span>⌛</span><strong id="timerText">00:30</strong></div>
 
     <div class="feed-pill">
       <div id="feedLines" class="feed-lines"></div>
@@ -38,11 +36,7 @@
       </form>
     </div>
 
-    <div class="people-pill">
-      <span>💬</span>
-      <span>👥</span>
-      <strong>8/8</strong>
-    </div>
+    <div class="people-pill"><span>💬</span><span>👥</span><strong>8/8</strong></div>
   </div>
 
   <div id="readPanel" class="read-panel">
@@ -56,13 +50,9 @@
     </div>
   </div>
 
-
   <div id="conversationPanel" class="conversation-panel hidden">
     <div class="conversation-header">
-      <div>
-        <div class="panel-label">IN CONVERSATION</div>
-        <div id="conversationName" class="conversation-name">Milo</div>
-      </div>
+      <div><div class="panel-label">IN CONVERSATION</div><div id="conversationName" class="conversation-name">Milo</div></div>
       <button id="endConversation" type="button">Leave</button>
     </div>
     <div id="conversationRead" class="conversation-read"></div>
@@ -74,9 +64,9 @@
 
   <div id="startModal" class="modal">
     <div class="modal-card">
-      <h1>Survivor Prototype v0.3</h1>
-      <p>This version gives you a 30-second camp phase, then throws the tribe straight into a quick Tug of War challenge.</p>
-      <p><strong>Move:</strong> click the map, or use WASD. <strong>Talk:</strong> click a nearby castaway, use a Talk button, or press T while in conversation. <strong>Goal:</strong> test whether conversations feel smoother without cluttering the camp.</p>
+      <h1>Survivor Prototype v0.4</h1>
+      <p>This version gives you a 30-second camp phase, a quick Tug of War challenge, and a 30-second Tribal Council phase.</p>
+      <p><strong>Move:</strong> click the map, or use WASD. <strong>Talk:</strong> click a nearby castaway, use a Talk button, or press T while in conversation.</p>
       <button id="startButton">Start 30-Second Camp Phase</button>
     </div>
   </div>
@@ -95,24 +85,33 @@
       <div class="panel-label">IMMUNITY CHALLENGE</div>
       <h1 id="challengeHeading">Tug of War</h1>
       <p id="challengeRead">Mash <strong>PULL!</strong> or press <strong>Space</strong>. Get the knot onto your side before time runs out.</p>
-
       <div class="challenge-timer"><span>TIME</span><strong id="challengeTimer">12.0</strong></div>
-
       <div class="tug-wrap" aria-label="Tug of war progress">
         <div class="tug-label left">OTHER TRIBE</div>
-        <div class="tug-track">
-          <div class="tug-center"></div>
-          <div id="tugKnot" class="tug-knot">🪢</div>
-        </div>
+        <div class="tug-track"><div class="tug-center"></div><div id="tugKnot" class="tug-knot">🪢</div></div>
         <div class="tug-label right">YOUR TRIBE</div>
       </div>
-
       <div id="challengeStatus" class="challenge-status">Ready... pull!</div>
       <button id="pullButton" class="pull-button">PULL!</button>
-      <button id="challengeRestartButton" class="hidden">Run It Again</button>
+      <button id="challengeRestartButton" class="hidden">Continue to Tribal Council</button>
+    </div>
+  </div>
+
+  <div id="tribalModal" class="modal hidden">
+    <div class="modal-card tribal-card">
+      <div class="panel-label">TRIBAL COUNCIL</div>
+      <h1 id="tribalHeading">Tribal Council</h1>
+      <p id="tribalRead">The tribe takes its seats. You have 30 seconds before the votes are revealed.</p>
+      <div class="challenge-timer"><span>TIME</span><strong id="tribalTimer">30</strong></div>
+      <div id="tribalCandidates" class="tribal-candidates" aria-label="Tribal Council castaways"></div>
+      <div id="tribalVoteStatus" class="tribal-status">The tribe is settling in...</div>
+      <button id="tribalCastButton" class="tribal-cast hidden" disabled>Cast Vote</button>
+      <div id="tribalTally" class="tribal-tally hidden"></div>
+      <button id="tribalRestartButton" class="hidden">Start New Day</button>
     </div>
   </div>
 
   <script src="/app.js"></script>
+  <script src="/tribal.js"></script>
 </body>
 </html>
