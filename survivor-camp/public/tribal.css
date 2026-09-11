@@ -1,0 +1,72 @@
+/* Tribal Council extension */
+.tribal-card {
+  width: min(720px, calc(100vw - 36px));
+  text-align: center;
+}
+
+.tribal-card .panel-label { text-align: center; }
+
+.tribal-candidates {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 8px 0 14px;
+}
+
+.tribal-candidate {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 12px 8px;
+  background: rgba(255,255,255,.08);
+  color: var(--cream);
+  font-weight: 850;
+  cursor: pointer;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.tribal-candidate:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.14);
+}
+
+.tribal-candidate.selected {
+  border-color: rgba(255,211,122,.8);
+  background: rgba(255,211,122,.18);
+}
+
+.tribal-candidate:disabled {
+  cursor: default;
+  opacity: .62;
+}
+
+.tribal-status {
+  min-height: 28px;
+  margin: 8px 0;
+  color: #fff2d4;
+  font-weight: 850;
+}
+
+.tribal-status.spectator { color: #c9d8e6; }
+
+.tribal-tally {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(20,16,13,.28);
+  text-align: left;
+}
+
+.tribal-tally h2 { margin: 0 0 8px; text-align: center; }
+.vote-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.vote-chip {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.09);
+  font-size: 13px;
+  font-weight: 800;
+}
+.voted-out { margin-top: 12px; text-align: center; font-size: 20px; font-weight: 900; }
+
+@media (max-width: 640px) {
+  .tribal-candidates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
