@@ -1,7 +1,5 @@
 # Survivor Camp Prototype v0.4
 
-A frontend gameplay prototype intended as a **developer handoff**, not a production multiplayer implementation.
-
 Current playable loop:
 
 1. 30-second camp/social phase.
